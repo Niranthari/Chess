@@ -5,14 +5,14 @@ export const Landing = ()=>{
        <div className = "pt-8">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="flex justify-center">
-                    <img src={"/chessboard.png"} className="max-w-96"/>
+                    <img src={"/chessboard.jpeg"} className="max-w-96"/>
                 </div>
-                <div>
-                    <h1 className="text-4xl font bold"> 
+                <div className="flex justify-center">
+                    <h1 className="text-4xl font bold text-white"> 
                         Play Chess online on the #2 Site!
                     </h1>
-                    <div className ="mt-4">
-                        <button className = "bg-blue-500 hover:bg-blue-700 text-white font bold py-2 px-4 rounded">
+                    <div className ="mt-4 flex justify-center">
+                        <button className = "px-8 py-16 text-2xl bg-green-500 hover:bg-blue-700 text-white font bold rounded">
                                             Play Online
                         </button>
                     </div>
