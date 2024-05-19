@@ -1,23 +1,43 @@
-import * as React from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css'
-import { Landing } from "./screens/Landing";
-import { Game } from "./screens/Game";
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Landing } from './screens/Landing';
+import { Game } from './screens/Game';
+import Login from './screens/Login';
+import { Suspense } from 'react';
+import { RecoilRoot } from 'recoil';
+import { useUser } from '@repo/store/useUser';
+import { Loader } from './components/Loader';
+import { Layout } from './layout';
 
 function App() {
-  //const [count, setCount] = useState(0)
-
   return (
-    <div className='h-screen bg-slate-950'>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Landing/>}></Route>
-      <Route path="/game" element={<Game/>}></Route>
-    </Routes>
-  </BrowserRouter>
-  </div> 
-  )
+    <div className="min-h-screen bg-stone-800">
+      <RecoilRoot>
+        <Suspense fallback={<Loader />}>
+          <AuthApp />
+        </Suspense>
+      </RecoilRoot>
+    </div>
+  );
 }
 
-export default App
+function AuthApp() {
+  const user = useUser();
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout children={<Landing />} />} />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route
+          path="/game/:gameId"
+          element={<Layout children={<Game />} />}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
